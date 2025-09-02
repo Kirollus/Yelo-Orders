@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Link with Input Text</title>
+  <title>Order Links</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 50px;
+      margin-top: 250px;
+      transition: background-color 0.3s, color 0.3s;
     }
     input {
       padding: 10px;
       width: 300px;
       font-size: 16px;
       margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s, border 0.3s;
     }
     button {
       padding: 10px 20px;
@@ -24,13 +28,59 @@
       border-radius: 8px;
       background-color: #a6258c;
       color: white;
+      transition: background-color 0.3s, color 0.3s;
     }
     button:hover {
       background-color: #2980b9;
     }
+
+    /* Simple dark mode toggle button */
+    #darkModeToggle {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      padding: 6px 12px;
+      font-size: 14px;
+      border-radius: 6px;
+      background: #444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    #darkModeToggle:hover {
+      background: #666;
+    }
+
+    /* Dark mode styles */
+    .dark-mode {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+    .dark-mode input {
+      background-color: #333;
+      color: #f5f5f5;
+      border: 1px solid #555;
+    }
+    .dark-mode button {
+      background-color: #555;
+      color: #f5f5f5;
+    }
+    .dark-mode button:hover {
+      background-color: #777;
+    }
+    .dark-mode #darkModeToggle {
+      background: #ccc;
+      color: #000;
+    }
+    .dark-mode #darkModeToggle:hover {
+      background: #aaa;
+    }
   </style>
 </head>
 <body>
+  <!-- Simple dark mode toggle -->
+  <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+
   <h2>Enter Order Number</h2>
   <input type="text" id="userText" placeholder="Type order number here">
   <br>
@@ -41,11 +91,14 @@
     function openLink(baseUrl) {
       var text = document.getElementById("userText").value;
       if (text.trim() !== "") {
-        // Append the text to the link (URL encoded)
         window.open(baseUrl + encodeURIComponent(text), "_blank");
       } else {
         alert("Please type something first");
       }
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
     }
   </script>
 </body>
