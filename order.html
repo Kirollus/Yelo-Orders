@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Link with Input Text</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    input {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #a6258c;
+      color: white;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter Order Number</h2>
+  <input type="text" id="userText" placeholder="Type order number here">
+  <br>
+  <button onclick="openLink('https://foodadmin.breadfast.com/en/dashboard/orders/details/')">Order Page</button>
+  <button onclick="openLink('https://www.breadfast.com/order-rating/?orderNumber=YR-')">Rating Page</button>
+
+  <script>
+    function openLink(baseUrl) {
+      var text = document.getElementById("userText").value;
+      if (text.trim() !== "") {
+        // Append the text to the link (URL encoded)
+        window.open(baseUrl + encodeURIComponent(text), "_blank");
+      } else {
+        alert("Please type something first");
+      }
+    }
+  </script>
+</body>
+</html>
