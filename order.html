@@ -7,104 +7,220 @@
     body {
       font-family: 'Times New Roman', serif;
       text-align: center;
-      margin-top: 250px;
-      transition: background-color 0.3s, color 0.3s;
+      margin-top: 150px;
+      transition: background-color 0.5s ease, color 0.5s ease;
+      overflow-x: hidden;
+      background: #f9f9f9;
     }
+
+    /* Dark mode background */
+    .dark-mode {
+      background: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    /* Fade-in animations */
+    .fade-in { opacity: 0; transform: translateY(30px); animation: fadeUp 0.8s ease forwards; }
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Logo */
+    #logo {
+      width: 100px;
+      margin-bottom: 15px;
+      animation: logoZoom 1s ease forwards, logoPulse 3s ease-in-out infinite, logoRotate 10s linear infinite;
+      filter: drop-shadow(0 0 8px rgba(166, 37, 140, 0.6));
+    }
+
+    @keyframes logoZoom {
+      from { transform: scale(0.5) rotate(0deg); opacity: 0; }
+      to { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    @keyframes logoPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.08) rotate(0deg); }
+    }
+
+    @keyframes logoRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     h2 {
-      font-size: 60px;
+      font-size: 50px;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
     }
 
     input {
-      padding: 30px;
-      width: 500px;
-      font-size: 16px;
+      padding: 20px;
+      width: 400px;
+      font-size: 18px;
       margin-bottom: 20px;
       border: 1px solid #ccc;
       border-radius: 6px;
-      transition: background-color 0.3s, color 0.3s, border 0.3s;
+      transition: background-color 0.3s, color 0.3s, border 0.3s, box-shadow 0.3s;
     }
-    button {
-      padding: 20px 40px;
-      margin: 10px;
-      font-size: 42px;
+    input:focus { outline: none; border-color: #a6258c; box-shadow: 0 0 6px rgba(166,37,140,0.6); }
+
+    /* زرار مسح */
+    #clearBtn {
+      margin-left: -40px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #999;
+    }
+    #clearBtn:hover { color: #a6258c; }
+
+    /* Buttons */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      padding: 18px 40px;
+      margin: 12px;
+      font-size: 22px;
+      font-weight: bold;
       cursor: pointer;
       border: none;
-      border-radius: 8px;
-      background-color: #a6258c;
+      border-radius: 12px;
       color: white;
-      transition: background-color 0.3s, color 0.3s;
-      font-family: Georgia, serif; /* 👈 هنا غيرنا الخط للأزرار فقط */
-    }
-    button:hover {
-      background-color: #2980b9;
+      transition: all 0.3s ease;
+      font-family: Verdana, sans-serif;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
 
-    /* Simple dark mode toggle button */
+    /* Ripple */
+    .btn::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .btn.ripple::after { animation: ripple 0.6s linear; }
+
+    @keyframes ripple {
+      from { transform: scale(0); opacity: 0.7; }
+      to { transform: scale(12); opacity: 0; }
+    }
+
+    #orderBtn { background: linear-gradient(135deg, #a6258c, #5e2b97); }
+    #orderBtn:hover { background: linear-gradient(135deg, #5e2b97, #2980b9); transform: translateY(-3px) scale(1.05); }
+
+    #ratingBtn { background: linear-gradient(135deg, #2980b9, #2ecc71); }
+    #ratingBtn:hover { background: linear-gradient(135deg, #2ecc71, #27ae60); transform: translateY(-3px) scale(1.05); }
+
+    /* Tooltip */
+    .btn[title]:hover::before {
+      content: attr(title);
+      position: absolute;
+      bottom: 120%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.75);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    /* Dark mode toggle */
     #darkModeToggle {
       position: absolute;
       top: 15px;
       left: 15px;
-      padding: 6px 12px;
-      font-size: 12px;
-      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 16px;
+      border-radius: 8px;
       background: #444;
       color: #fff;
       border: none;
       cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      font-weight: bold;
+      transition: all 0.3s ease;
     }
-    #darkModeToggle:hover {
-      background: #666;
-    }
+    #darkModeToggle:hover { background: #666; transform: scale(1.1); }
 
-    /* Dark mode styles */
-    .dark-mode {
-      background-color: #1e1e1e;
-      color: #f5f5f5;
-    }
-    .dark-mode input {
-      background-color: #333;
-      color: #f5f5f5;
-      border: 1px solid #555;
-    }
-    .dark-mode button {
-      background-color: #555;
-      color: #f5f5f5;
-    }
-    .dark-mode button:hover {
-      background-color: #777;
-    }
-    .dark-mode #darkModeToggle {
-      background: #ccc;
-      color: #000;
-    }
-    .dark-mode #darkModeToggle:hover {
-      background: #aaa;
-    }
+    .dark-mode input { background: #333; color: #f5f5f5; border: 1px solid #555; }
+    .dark-mode #orderBtn { background: linear-gradient(135deg, #555, #333); }
+    .dark-mode #orderBtn:hover { background: linear-gradient(135deg, #666, #444); }
+    .dark-mode #ratingBtn { background: linear-gradient(135deg, #444, #222); }
+    .dark-mode #ratingBtn:hover { background: linear-gradient(135deg, #555, #333); }
+    .dark-mode #darkModeToggle { background: #ccc; color: #000; }
   </style>
 </head>
 <body>
-  <!-- Simple dark mode toggle -->
-  <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+  <button id="darkModeToggle" class="fade-in">🌙</button>
 
-  <h2>Enter Order Number</h2>
-  <input type="text" id="userText" placeholder="Type order number here">
+  <!-- الشعار -->
+  <img id="logo" src="images.png" alt="Company Logo" class="fade-in delay-1">
+
+  <h2 class="fade-in delay-1">Enter Order Number</h2>
+  <div style="display: inline-flex; align-items: center;" class="fade-in delay-2">
+    <input type="text" id="userText" placeholder="Type order number here">
+    <button id="clearBtn">&times;</button>
+  </div>
+
   <br>
-  <button onclick="openLink('https://foodadmin.breadfast.com/en/dashboard/orders/details/')">Order Page</button>
-  <button onclick="openLink('https://www.breadfast.com/order-rating/?orderNumber=YR-')">Rating Page</button>
+  <button id="orderBtn" class="btn fade-in delay-3" title="Open order details">Order Page</button>
+  <button id="ratingBtn" class="btn fade-in delay-3" title="Open rating page">Rating Page</button>
 
   <script>
+    const input = document.getElementById("userText");
+    const clearBtn = document.getElementById("clearBtn");
+    const orderBtn = document.getElementById("orderBtn");
+    const ratingBtn = document.getElementById("ratingBtn");
+    const darkToggle = document.getElementById("darkModeToggle");
+
+    input.focus();
+
     function openLink(baseUrl) {
-      var text = document.getElementById("userText").value;
-      if (text.trim() !== "") {
+      const text = input.value.trim();
+      if (text !== "") {
         window.open(baseUrl + encodeURIComponent(text), "_blank");
+        input.select();
       } else {
-        alert("Please type something first");
+        input.style.borderColor = "red";
+        setTimeout(() => input.style.borderColor = "#ccc", 800);
+        alert("Please type an order number first!");
       }
     }
 
-    function toggleDarkMode() {
+    orderBtn.addEventListener("click", () => openLink("https://foodadmin.breadfast.com/en/dashboard/orders/details/"));
+    ratingBtn.addEventListener("click", () => openLink("https://www.breadfast.com/order-rating/?orderNumber=YR-"));
+
+    input.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") openLink("https://foodadmin.breadfast.com/en/dashboard/orders/details/");
+    });
+
+    clearBtn.addEventListener("click", () => { input.value = ""; input.focus(); });
+
+    darkToggle.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-    }
+      darkToggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    });
+
+    document.querySelectorAll(".btn").forEach((btn) => {
+      btn.addEventListener("click", function (e) {
+        this.classList.remove("ripple");
+        void this.offsetWidth;
+        this.classList.add("ripple");
+      });
+    });
   </script>
 </body>
 </html>
